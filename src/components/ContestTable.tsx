@@ -31,35 +31,43 @@ function formatTime(time: number): string {
   return date.toLocaleString();
 }
 
-export default function ContestTable({ contests }: { contests: Contest[] }) {
+export default function ContestTable({
+  contests,
+  classname = "",
+}: {
+  contests: Contest[];
+  classname: string;
+}) {
   return (
-    <Table>
-      <TableHeader className="font-semibold text-gray-500">
-        <TableRow>
-          <TableHead className="w-[100px]">Site</TableHead>
-          <TableHead>Title</TableHead>
-          <TableHead>Start Time</TableHead>
-          <TableHead>End Time</TableHead>
-          <TableHead>Duration</TableHead>
-          <TableHead className="">URL</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody className="text-gray-300">
-        {contests.map((contest) => (
-          <TableRow key={contest.title}>
-            <TableCell className="font-medium">{contest.site}</TableCell>
-            <TableCell>{contest.title}</TableCell>
-            <TableCell>{formatTime(contest.startTime)}</TableCell>
-            <TableCell>{formatTime(contest.endTime)}</TableCell>
-            <TableCell>{formatDuration(contest.duration)}</TableCell>
-            <TableCell className="text-right">
-              <Link href={contest.url}>
-                <LinkIcon />
-              </Link>
-            </TableCell>
+    <div className={classname}>
+      <Table>
+        <TableHeader className="font-semibold text-gray-500">
+          <TableRow>
+            <TableHead className="w-[100px]">Site</TableHead>
+            <TableHead>Title</TableHead>
+            <TableHead>Start Time</TableHead>
+            <TableHead>End Time</TableHead>
+            <TableHead>Duration</TableHead>
+            <TableHead className="">URL</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody className="text-gray-300">
+          {contests.map((contest) => (
+            <TableRow key={contest.title}>
+              <TableCell className="font-medium">{contest.site}</TableCell>
+              <TableCell>{contest.title}</TableCell>
+              <TableCell>{formatTime(contest.startTime)}</TableCell>
+              <TableCell>{formatTime(contest.endTime)}</TableCell>
+              <TableCell>{formatDuration(contest.duration)}</TableCell>
+              <TableCell className="text-right">
+                <Link href={contest.url}>
+                  <LinkIcon />
+                </Link>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }
