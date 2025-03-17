@@ -1,12 +1,13 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Link as LinkIcon } from "lucide-react";
+import Link from "next/link";
 
 type Site = "codechef" | "leetcode" | "codeforces";
 interface Contest {
@@ -40,7 +41,7 @@ export default function ContestTable({ contests }: { contests: Contest[] }) {
           <TableHead>Start Time</TableHead>
           <TableHead>End Time</TableHead>
           <TableHead>Duration</TableHead>
-          <TableHead className="text-right">URL</TableHead>
+          <TableHead className="">URL</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="text-gray-300">
@@ -51,7 +52,11 @@ export default function ContestTable({ contests }: { contests: Contest[] }) {
             <TableCell>{formatTime(contest.startTime)}</TableCell>
             <TableCell>{formatTime(contest.endTime)}</TableCell>
             <TableCell>{formatDuration(contest.duration)}</TableCell>
-            <TableCell className="text-right">{contest.url}</TableCell>
+            <TableCell className="text-right">
+              <Link href={contest.url}>
+                <LinkIcon />
+              </Link>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
