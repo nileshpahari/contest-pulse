@@ -6,12 +6,12 @@ export function Navbar() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-sm border-b border-transparent">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-15 ">
           <Link href="/" className="relative group">
            <Logo /> 
           </Link>
 
-          <div className="flex gap-10 ">
+          <div className="flex gap-10 items-center">
             <Link
               href="/upcoming"
               className="text-gray-400  text-muted-foreground font-medium hover:text-gray-600  relative group"
