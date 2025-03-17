@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/table";
 import { Link as LinkIcon } from "lucide-react";
 import Link from "next/link";
+import { Bookmark } from "lucide-react";
 
 type Site = "codechef" | "leetcode" | "codeforces";
 interface Contest {
@@ -48,7 +49,8 @@ export default function ContestTable({
             <TableHead>Start Time</TableHead>
             <TableHead>End Time</TableHead>
             <TableHead>Duration</TableHead>
-            <TableHead className="">URL</TableHead>
+            <TableHead>URL</TableHead>
+            <TableHead className="text-right">Bookmark</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="text-gray-300">
@@ -59,10 +61,13 @@ export default function ContestTable({
               <TableCell>{formatTime(contest.startTime)}</TableCell>
               <TableCell>{formatTime(contest.endTime)}</TableCell>
               <TableCell>{formatDuration(contest.duration)}</TableCell>
-              <TableCell className="text-right">
+              <TableCell>
                 <Link href={contest.url}>
                   <LinkIcon />
                 </Link>
+              </TableCell>
+              <TableCell className="text-right">
+                <Bookmark />
               </TableCell>
             </TableRow>
           ))}
