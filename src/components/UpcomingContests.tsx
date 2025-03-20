@@ -1,7 +1,6 @@
 // import { nanoid } from "nanoid";
 import ContestTable from "./ContestTable";
 export default function UpcomingContests() {
-  type Site = "codechef" | "leetcode" | "codeforces";
 
   return (
     <div className="py-10">
