@@ -8,25 +8,25 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-15 ">
           <Link href="/" className="relative group">
-           <Logo /> 
+            <Logo />
           </Link>
 
           <div className="flex gap-10 items-center">
             <Link
               href="/upcoming"
-              className="text-gray-400  text-muted-foreground font-medium hover:text-gray-600  relative group"
+              className="  text-muted-foreground font-medium   relative group"
             >
               Upcoming Contests
             </Link>
             <Link
               href="/saved"
-              className="text-gray-400   text-muted-foreground font-medium hover:text-gray-600  relative group"
+              className="  text-muted-foreground font-medium   relative group"
             >
               Saved Contests
             </Link>
             <Link
               href="/account"
-              className="text-gray-400   text-muted-foreground font-medium hover:text-gray-600  relative group"
+              className="  text-muted-foreground font-medium   relative group"
             >
               Account
             </Link>
@@ -51,7 +51,7 @@ export function Navbar() {
     //     <button
     //       data-collapse-toggle="navbar-solid-bg"
     //       type="button"
-    //       className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+    //       className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm  -500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark: -400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
     //       aria-controls="navbar-solid-bg"
     //       aria-expanded="false"
     //     >
@@ -86,7 +86,7 @@ export function Navbar() {
     //         <li>
     //           <a
     //             href="#"
-    //             className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+    //             className="block py-2 px-3 md:p-0  -900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
     //           >
     //             Services
     //           </a>
@@ -94,7 +94,7 @@ export function Navbar() {
     //         <li>
     //           <a
     //             href="#"
-    //             className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+    //             className="block py-2 px-3 md:p-0  -900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
     //           >
     //             Pricing
     //           </a>
@@ -102,7 +102,7 @@ export function Navbar() {
     //         <li>
     //           <a
     //             href="#"
-    //             className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+    //             className="block py-2 px-3 md:p-0  -900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
     //           >
     //             Contact
     //           </a>

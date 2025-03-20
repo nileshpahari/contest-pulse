@@ -20,7 +20,7 @@ interface Contest {
   duration: number;
   endTime: number;
   url: string;
-  id: number;
+  id?: number;
 }
 
 export default function ContestTable({
@@ -69,53 +69,58 @@ export default function ContestTable({
     }
   };
 
-if(loading)  {
-    return <h1 className="text-3xl font-bold min-w-screen flex justify-center items-center">Fetching contest details...</h1>
-}
-  if(!loading) return (
-    <div className={classname}>
-      <Table>
-        <TableHeader className="font-semibold text-gray-500">
-          <TableRow>
-            <TableHead className="w-[100px]">Site</TableHead>
-            <TableHead>Title</TableHead>
-            <TableHead>Start Time</TableHead>
-            <TableHead>End Time</TableHead>
-            <TableHead>Duration</TableHead>
-            <TableHead>URL</TableHead>
-            <TableHead className="text-right">Bookmark</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody className="text-gray-300">
-          {contests.map((contest) => (
-            <TableRow key={contest.id}>
-              <TableCell className="font-medium">{contest.site}</TableCell>
-              <TableCell>{contest.title}</TableCell>
-              <TableCell>{formatTime(contest.startTime)}</TableCell>
-              <TableCell>{formatTime(contest.endTime)}</TableCell>
-              <TableCell>{formatDuration(contest.duration)}</TableCell>
-              <TableCell>
-                <Link href={contest.url}>
-                  <LinkIcon />
-                </Link>
-              </TableCell>
-              <TableCell className="text-right">
-                <Bookmark
-                  onClick={() => {
-                    toggleBookmark(contest);
-                    console.log(contest);
-                  }}
-                  className={
-                    bookmarks.some((c) => c.id === contest.id)
-                      ? "fill-yellow-500"
-                      : ""
-                  }
-                />
-              </TableCell>
+  if (loading) {
+    return (
+      <h1 className="text-3xl font-bold min-w-screen flex justify-center items-center">
+        Fetching contest details...
+      </h1>
+    );
+  }
+  if (!loading)
+    return (
+      <div className={classname}>
+        <Table>
+          <TableHeader className="font-semibold  -500">
+            <TableRow>
+              <TableHead className="w-[100px]">Site</TableHead>
+              <TableHead>Title</TableHead>
+              <TableHead>Start Time</TableHead>
+              <TableHead>End Time</TableHead>
+              <TableHead>Duration</TableHead>
+              <TableHead>URL</TableHead>
+              <TableHead className="text-right">Bookmark</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
-  );
+          </TableHeader>
+          <TableBody className=" -300">
+            {contests.map((contest) => (
+              <TableRow key={contest.id}>
+                <TableCell className="font-medium">{contest.site}</TableCell>
+                <TableCell>{contest.title}</TableCell>
+                <TableCell>{formatTime(contest.startTime)}</TableCell>
+                <TableCell>{formatTime(contest.endTime)}</TableCell>
+                <TableCell>{formatDuration(contest.duration)}</TableCell>
+                <TableCell>
+                  <Link href={contest.url}>
+                    <LinkIcon />
+                  </Link>
+                </TableCell>
+                <TableCell className="w-full flex justify-center">
+                  <Bookmark
+                    onClick={() => {
+                      toggleBookmark(contest);
+                      console.log(contest);
+                    }}
+                    className={
+                      bookmarks.some((c) => c.id === contest.id)
+                        ? "fill-yellow-500"
+                        : ""
+                    }
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    );
 }

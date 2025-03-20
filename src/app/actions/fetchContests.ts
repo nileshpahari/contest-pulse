@@ -10,10 +10,11 @@ interface Contest {
   duration: number;
   endTime: number;
   url: string;
-  id: number;
+  id?: number;
 }
 
 export async function fetchContests(): Promise<Contest[]> {
   const contests: Contest[] = (await axios.get(URL)).data;
+  
   return contests;
 }
