@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Link as LinkIcon, Bookmark } from "lucide-react";
 import Link from "next/link";
+import { fetchContests } from "@/app/actions/fetchContests";
 
 type Site = "codechef" | "leetcode" | "codeforces";
 interface Contest {
@@ -23,15 +24,21 @@ interface Contest {
 }
 
 export default function ContestTable({
-  contests,
   classname = "",
 }: {
-  contests: Contest[];
   classname: string;
 }) {
+  const [loading, setLoading] = useState(true);
+  const [contests, setContests] = useState<Contest[]>([]);
   const [bookmarks, setBookmarks] = useState<Contest[]>([]);
 
   useEffect(() => {
+    fetchContests().then((contests) => {
+      if (contests) {
+        setContests(contests);
+        setLoading(false);
+      }
+    });
     const savedContests = JSON.parse(localStorage.getItem("contests") || "[]");
     console.log(savedContests);
     setBookmarks(savedContests);
@@ -62,7 +69,10 @@ export default function ContestTable({
     }
   };
 
-  return (
+if(loading)  {
+    return <h1 className="text-3xl font-bold min-w-screen flex justify-center items-center">Fetching contest details...</h1>
+}
+  if(!loading) return (
     <div className={classname}>
       <Table>
         <TableHeader className="font-semibold text-gray-500">

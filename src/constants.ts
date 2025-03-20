@@ -1,0 +1,1 @@
+export const URL = "https://competeapi.vercel.app/contests/upcoming/";
