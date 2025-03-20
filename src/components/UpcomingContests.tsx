@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import ContestTable from "./ContestTable";
 export default function UpcomingContests() {
   type Site = "codechef" | "leetcode" | "codeforces";
@@ -9,8 +10,9 @@ export default function UpcomingContests() {
     duration: number;
     endTime: number;
     url: string;
+    id: number;
   }
-  
+
   const contests: Contest[] = [
     {
       site: "codeforces",
@@ -19,6 +21,7 @@ export default function UpcomingContests() {
       duration: 7200000,
       endTime: 1742229300000,
       url: "https://codeforces.com/contest/2075",
+      id: 1,
     },
     {
       site: "codechef",
@@ -27,6 +30,7 @@ export default function UpcomingContests() {
       duration: 7200000,
       endTime: 1742401800000,
       url: "https://www.codechef.com/START178",
+      id: 2,
     },
     {
       site: "codeforces",
@@ -35,6 +39,7 @@ export default function UpcomingContests() {
       duration: 7200000,
       endTime: 1742661300000,
       url: "https://codeforces.com/contest/2085",
+      id: 3,
     },
     {
       site: "leetcode",
@@ -43,6 +48,7 @@ export default function UpcomingContests() {
       duration: 324000000,
       endTime: 1743021000000,
       url: "https://leetcode.com/contest/weekly-contest-442",
+      id: 4,
     },
     {
       site: "codechef",
@@ -51,6 +57,7 @@ export default function UpcomingContests() {
       duration: 7200000,
       endTime: 1743006600000,
       url: "https://www.codechef.com/START179",
+      id: 5,
     },
     {
       site: "leetcode",
@@ -59,6 +66,7 @@ export default function UpcomingContests() {
       duration: 324000000,
       endTime: 1743582600000,
       url: "https://leetcode.com/contest/biweekly-contest-153",
+      id: 6,
     },
     {
       site: "codeforces",
@@ -67,13 +75,19 @@ export default function UpcomingContests() {
       duration: 10800000,
       endTime: 1743874500000,
       url: "https://codeforces.com/contest/2084",
+      id: 7,
     },
   ];
 
   return (
     <div className="py-10">
-      <div className="text-2xl font-bold text-gray-300 mb-5 mt-2 w-full text-center">Upcoming Contests</div>
-      <ContestTable classname="max-w-3/4 m-auto border rounded-md px-4 py-1" contests={contests} />
+      <div className="text-2xl font-bold text-gray-300 mb-5 mt-2 w-full text-center">
+        Upcoming Contests
+      </div>
+      <ContestTable
+        classname="max-w-3/4 m-auto border rounded-md px-4 py-1"
+        contests={contests}
+      />
     </div>
   );
 }

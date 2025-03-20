@@ -1,3 +1,5 @@
+"use client";
+import { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -6,9 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Link as LinkIcon } from "lucide-react";
+import { Link as LinkIcon, Bookmark } from "lucide-react";
 import Link from "next/link";
-import { Bookmark } from "lucide-react";
 
 type Site = "codechef" | "leetcode" | "codeforces";
 interface Contest {
@@ -18,18 +19,7 @@ interface Contest {
   duration: number;
   endTime: number;
   url: string;
-}
-
-function formatDuration(ms: number): string {
-  const hours = Math.floor(ms / 3600000);
-  const minutes = Math.floor((ms % 3600000) / 60000);
-  const seconds = Math.floor((ms % 60000) / 1000);
-  return `${hours}h ${minutes}m ${seconds}s`;
-}
-
-function formatTime(time: number): string {
-  const date = new Date(time);
-  return date.toLocaleString();
+  id: number;
 }
 
 export default function ContestTable({
@@ -39,6 +29,39 @@ export default function ContestTable({
   contests: Contest[];
   classname: string;
 }) {
+  const [bookmarks, setBookmarks] = useState<Contest[]>([]);
+
+  useEffect(() => {
+    const savedContests = JSON.parse(localStorage.getItem("contests") || "[]");
+    console.log(savedContests);
+    setBookmarks(savedContests);
+  }, []);
+
+  function formatDuration(ms: number): string {
+    const hours = Math.floor(ms / 3600000);
+    const minutes = Math.floor((ms % 3600000) / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    return `${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  function formatTime(time: number): string {
+    return new Date(time).toLocaleString();
+  }
+
+  const toggleBookmark = (contest: Contest) => {
+    const saved = JSON.parse(localStorage.getItem("contests") || "[]");
+
+    if (saved.some((c: Contest) => c.id === contest.id)) {
+      const updated = saved.filter((c: Contest) => c.id !== contest.id);
+      localStorage.setItem("contests", JSON.stringify(updated));
+      setBookmarks(updated);
+    } else {
+      const updated = [...saved, contest];
+      localStorage.setItem("contests", JSON.stringify(updated));
+      setBookmarks(updated);
+    }
+  };
+
   return (
     <div className={classname}>
       <Table>
@@ -55,7 +78,7 @@ export default function ContestTable({
         </TableHeader>
         <TableBody className="text-gray-300">
           {contests.map((contest) => (
-            <TableRow key={contest.title}>
+            <TableRow key={contest.id}>
               <TableCell className="font-medium">{contest.site}</TableCell>
               <TableCell>{contest.title}</TableCell>
               <TableCell>{formatTime(contest.startTime)}</TableCell>
@@ -67,7 +90,17 @@ export default function ContestTable({
                 </Link>
               </TableCell>
               <TableCell className="text-right">
-                <Bookmark />
+                <Bookmark
+                  onClick={() => {
+                    toggleBookmark(contest);
+                    console.log(contest);
+                  }}
+                  className={
+                    bookmarks.some((c) => c.id === contest.id)
+                      ? "fill-yellow-500"
+                      : ""
+                  }
+                />
               </TableCell>
             </TableRow>
           ))}
