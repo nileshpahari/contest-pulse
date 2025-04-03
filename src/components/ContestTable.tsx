@@ -58,8 +58,8 @@ export default function ContestTable({
   const toggleBookmark = (contest: Contest) => {
     const saved = JSON.parse(localStorage.getItem("contests") || "[]");
 
-    if (saved.some((c: Contest) => c.id === contest.id)) {
-      const updated = saved.filter((c: Contest) => c.id !== contest.id);
+    if (saved.some((c: Contest) => c.title === contest.title)) {
+      const updated = saved.filter((c: Contest) => c.title !== contest.title);
       localStorage.setItem("contests", JSON.stringify(updated));
       setBookmarks(updated);
     } else {
@@ -93,7 +93,7 @@ export default function ContestTable({
           </TableHeader>
           <TableBody className=" -300">
             {contests.map((contest) => (
-              <TableRow key={contest.id}>
+              <TableRow key={contest.title}>
                 <TableCell className="font-medium">{contest.site}</TableCell>
                 <TableCell>{contest.title}</TableCell>
                 <TableCell>{formatTime(contest.startTime)}</TableCell>
@@ -111,7 +111,7 @@ export default function ContestTable({
                       console.log(contest);
                     }}
                     className={
-                      bookmarks.some((c) => c.id === contest.id)
+                      bookmarks.some((c) => c.title === contest.title)
                         ? "fill-yellow-500"
                         : ""
                     }
