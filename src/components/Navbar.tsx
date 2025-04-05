@@ -1,5 +1,4 @@
-"use client";
-import { useSession } from "next-auth/react";
+// "use client";
 import Link from "next/link";
 import { ModeToggle } from "./ThemeToggler";
 import Logo from "./Logo";
@@ -8,12 +7,17 @@ export async function Navbar() {
   const session = await getServerSession();
   const navItems = [
     {
-      name: "Upcoming Contests",
+      name: "Upcoming",
       path: "/upcoming",
       active: true,
     },
     {
-      name: "Saved Contests",
+      name: "Past",
+      path: "/past",
+      active: true,
+    },
+    {
+      name: "Saved",
       path: "/saved",
       active: true,
     },
@@ -41,6 +45,7 @@ export async function Navbar() {
               (item) =>
                 item.active && (
                   <Link
+                  key={item.path}
                     href={item.path}
                     className="  text-muted-foreground font-medium   relative group"
                   >
@@ -53,3 +58,5 @@ export async function Navbar() {
         </div>
       </div>
     </nav>
+  );
+}
