@@ -1,10 +1,8 @@
-import NextAuth from "next-auth";
-import NEXT_AUTH_CONFIG from "@/lib/auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import client from "@/db";
 import bcrypt from "bcryptjs";
+
 
 interface User {
   id: string;
@@ -13,8 +11,9 @@ interface User {
   lastName: string | null;
 }
 
-const handler = NextAuth({
-  providers: [
+
+const NEXT_AUTH_CONFIG = {
+      providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -51,31 +50,11 @@ const handler = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
-    GitHubProvider({
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
-    }),
   ],
-
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        // User is available during sign-in
-        const u = user as User;
-        token.firstName = u.firstName;
-        token.lastName = u.lastName;
-        token.id = user.id;
-      }
-      return token;
-    },
-    session({ session, token }: any) {
-      session.user.id = token.id;
-      session.user.firstName = token.firstName;
-      session.user.lastName = token.lastName;
-      return session;
-    },
-  },
-});
 
-export { handler as GET, handler as POST };
+  }
+}
+
+export default NEXT_AUTH_CONFIG

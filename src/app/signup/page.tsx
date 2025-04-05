@@ -6,13 +6,6 @@ import { signIn, useSession } from "next-auth/react";
 
 export default function SignUp() {
   const { data: session, status } = useSession();
-  const router = useRouter();
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/");
-    }
-  }, [session]);
-  if (status == "authenticated") return null;
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -22,6 +15,13 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const router = useRouter();
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [session]);
+  if (status == "authenticated") return null;
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -34,7 +34,7 @@ export default function SignUp() {
     });
 
     if (!res.ok) {
-      const msg = await res.text();
+      const msg = await res.json();
       setError(msg || "Something went wrong");
       setLoading(false);
       return;
