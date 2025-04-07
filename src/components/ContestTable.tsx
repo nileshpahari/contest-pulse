@@ -32,15 +32,38 @@ export default function ContestTable({
   const [contests, setContests] = useState<Contest[]>([]);
   const [bookmarks, setBookmarks] = useState<Contest[]>([]);
 
+  // useEffect(() => {
+  //   fetchContests().then((contests) => {
+  //     if (contests) {
+  //       setContests(contests);
+  //       setLoading(false);
+  //     }
+  //   });
+  //   const savedContests = JSON.parse(localStorage.getItem("contests") || "[]");
+  //   console.log(savedContests);
+  //   setBookmarks(savedContests);
+  // }, []);
   useEffect(() => {
-    fetchContests().then((contests) => {
-      if (contests) {
-        setContests(contests);
-        setLoading(false);
-      }
-    });
+    const lastFetch = localStorage.getItem("lastFetch");
+    const now = Date.now();
+    const oneDay = 24 * 60 * 60 * 1000;
+
+    if (!lastFetch || now - parseInt(lastFetch) > oneDay) {
+      fetchContests().then((contests) => {
+        if (contests) {
+          setContests(contests);
+          localStorage.setItem("cachedContests", JSON.stringify(contests));
+          localStorage.setItem("lastFetch", now.toString());
+          setLoading(false);
+        }
+      });
+    } else {
+      const cached = JSON.parse(localStorage.getItem("cachedContests") || "[]");
+      setContests(cached);
+      setLoading(false);
+    }
+
     const savedContests = JSON.parse(localStorage.getItem("contests") || "[]");
-    console.log(savedContests);
     setBookmarks(savedContests);
   }, []);
 
