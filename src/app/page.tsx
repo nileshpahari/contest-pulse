@@ -1,10 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
-import UnderConstruction from "@/components/UnderConstruction";
-import { useEffect } from "react";
 import { WavyBackground } from "@/components/ui/wavy-background";
-import HeroSectionOne from "@/components/hero-section-demo-1";
 import { motion } from "framer-motion";
+import Link from "next/link";
 export default function Home() {
   const router = useRouter();
 
@@ -61,12 +59,12 @@ export default function Home() {
             transition={{ duration: 0.4, delay: 1.2 }}
             className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
           >
-            <button className="w-52 rounded-lg bg-indigo-600 px-6 py-2 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-700 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+            <Link href="/upcoming" className="w-52 rounded-lg bg-indigo-600 px-6 py-2 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-700 dark:bg-white dark:text-black dark:hover:bg-gray-200 text-center">
               Explore Contests
-            </button>
-            <button className="w-52 rounded-lg border border-gray-300 bg-white px-6 py-2 text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
+            </Link>
+            <Link href="/about" className="w-52 rounded-lg border border-gray-300 bg-white px-6 py-2 text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900 text-center">
               Learn More
-            </button>
+            </Link>
           </motion.div>
         </div>
       </div>
