@@ -71,7 +71,7 @@ export default function SavedContests() {
 
   if (bookmarks.length === 0) {
     return (
-      <h1 className="text-2xl font-semibold text-center mt-10">
+      <h1 className="text-2xl font-semibold text-center flex h-screen justify-center items-center">
         No saved contests
       </h1>
     );

@@ -5,8 +5,8 @@ import { useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
-  // useEffect(() => {
-  //   router.push("/upcoming");
-  // }, [router]);
+  useEffect(() => {
+    router.push("/upcoming");
+  }, [router]);
   return <UnderConstruction />;
 }
