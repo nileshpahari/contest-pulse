@@ -1,0 +1,9 @@
+{
+  "cron": [
+    {
+      "path": "/api/fetch",
+      "schedule": "0 0 * * *",
+      "timeZone": "Asia/Kolkata"
+    }
+  ]
+}

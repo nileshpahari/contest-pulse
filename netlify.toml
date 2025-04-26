@@ -1,0 +1,4 @@
+# ./netlify.toml
+
+[functions."fetch"]
+schedule = "@daily"
