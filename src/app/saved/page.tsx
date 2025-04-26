@@ -12,16 +12,7 @@ import {
 import { Link as LinkIcon, BookmarkX, AwardIcon } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-
-type Site = "codechef" | "leetcode" | "codeforces";
-interface Contest {
-  site: Site;
-  title: string;
-  startTime: number;
-  duration: number;
-  endTime: number;
-  url: string;
-}
+import { Contest } from "@/types";
 
 export default function SavedContests() {
   const { data: session, status } = useSession();
@@ -47,27 +38,18 @@ export default function SavedContests() {
     laodSaved();
   }, []);
 
-  const removeBookmark = async (title: string) => {
-    const updated = bookmarks.filter((c) => c.title !== title);
+  const removeBookmark = async (id: number) => {
+    const updated = bookmarks.filter((c) => c.id !== id);
     setBookmarks(updated);
     localStorage.setItem("contests", JSON.stringify(updated));
     if (status === "authenticated") {
       await fetch("/api/saved", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title }),
+        body: JSON.stringify({ id }),
       });
     }
   };
-
-  const formatDuration = (ms: number) => {
-    const h = Math.floor(ms / 3600000);
-    const m = Math.floor((ms % 3600000) / 60000);
-    const s = Math.floor((ms % 60000) / 1000);
-    return `${h}h ${m}m ${s}s`;
-  };
-
-  const formatTime = (t: number) => new Date(t).toLocaleString();
 
   if (bookmarks.length === 0) {
     return (
@@ -89,7 +71,6 @@ export default function SavedContests() {
               <TableHead className="w-[100px]">Site</TableHead>
               <TableHead>Title</TableHead>
               <TableHead>Start Time</TableHead>
-              <TableHead>End Time</TableHead>
               <TableHead>Duration</TableHead>
               <TableHead>URL</TableHead>
               <TableHead className="text-right">Remove</TableHead>
@@ -100,9 +81,8 @@ export default function SavedContests() {
               <TableRow key={contest.title}>
                 <TableCell>{contest.site}</TableCell>
                 <TableCell>{contest.title}</TableCell>
-                <TableCell>{formatTime(contest.startTime)}</TableCell>
-                <TableCell>{formatTime(contest.endTime)}</TableCell>
-                <TableCell>{formatDuration(contest.duration)}</TableCell>
+                <TableCell>{contest.startTime}</TableCell>
+                <TableCell>{contest.duration}</TableCell>
                 <TableCell>
                   <Link href={contest.url}>
                     <LinkIcon />
@@ -110,7 +90,7 @@ export default function SavedContests() {
                 </TableCell>
                 <TableCell className="w-full flex justify-center">
                   <BookmarkX
-                    onClick={() => removeBookmark(contest.title)}
+                    onClick={() => removeBookmark(contest.id)}
                     className="hover:text-red-500 cursor-pointer"
                   />
                 </TableCell>

@@ -11,17 +11,7 @@ import {
 import { Link as LinkIcon, Bookmark } from "lucide-react";
 import Link from "next/link";
 import { fetchContests } from "@/app/actions/fetchContests";
-
-type Site = "codechef" | "leetcode" | "codeforces";
-interface Contest {
-  site: Site;
-  title: string;
-  startTime: number;
-  duration: number;
-  endTime: number;
-  url: string;
-  id?: number;
-}
+import { Contest } from "@/types/index";
 
 export default function ContestTable({
   classname = "",
@@ -32,57 +22,23 @@ export default function ContestTable({
   const [contests, setContests] = useState<Contest[]>([]);
   const [bookmarks, setBookmarks] = useState<Contest[]>([]);
 
-  // useEffect(() => {
-  //   fetchContests().then((contests) => {
-  //     if (contests) {
-  //       setContests(contests);
-  //       setLoading(false);
-  //     }
-  //   });
-  //   const savedContests = JSON.parse(localStorage.getItem("contests") || "[]");
-  //   console.log(savedContests);
-  //   setBookmarks(savedContests);
-  // }, []);
   useEffect(() => {
-    const lastFetch = localStorage.getItem("lastFetch");
-    const now = Date.now();
-    const oneDay = 24 * 60 * 60 * 1000;
-
-    if (!lastFetch || now - parseInt(lastFetch) > oneDay) {
-      fetchContests().then((contests) => {
-        if (contests) {
-          setContests(contests);
-          localStorage.setItem("cachedContests", JSON.stringify(contests));
-          localStorage.setItem("lastFetch", now.toString());
-          setLoading(false);
-        }
-      });
-    } else {
-      const cached = JSON.parse(localStorage.getItem("cachedContests") || "[]");
-      setContests(cached);
-      setLoading(false);
-    }
-
+    fetchContests().then((contests) => {
+      if (contests) {
+        setContests(contests);
+        setLoading(false);
+      }
+    });
     const savedContests = JSON.parse(localStorage.getItem("contests") || "[]");
+    console.log(savedContests);
     setBookmarks(savedContests);
   }, []);
-
-  function formatDuration(ms: number): string {
-    const hours = Math.floor(ms / 3600000);
-    const minutes = Math.floor((ms % 3600000) / 60000);
-    const seconds = Math.floor((ms % 60000) / 1000);
-    return `${hours}h ${minutes}m ${seconds}s`;
-  }
-
-  function formatTime(time: number): string {
-    return new Date(time).toLocaleString();
-  }
 
   const toggleBookmark = (contest: Contest) => {
     const saved = JSON.parse(localStorage.getItem("contests") || "[]");
 
-    if (saved.some((c: Contest) => c.title === contest.title)) {
-      const updated = saved.filter((c: Contest) => c.title !== contest.title);
+    if (saved.some((c: Contest) => c.id === contest.id)) {
+      const updated = saved.filter((c: Contest) => c.id !== contest.id);
       localStorage.setItem("contests", JSON.stringify(updated));
       setBookmarks(updated);
     } else {
@@ -108,7 +64,6 @@ export default function ContestTable({
               <TableHead className="w-[100px]">Site</TableHead>
               <TableHead>Title</TableHead>
               <TableHead>Start Time</TableHead>
-              <TableHead>End Time</TableHead>
               <TableHead>Duration</TableHead>
               <TableHead>URL</TableHead>
               <TableHead className="text-right">Bookmark</TableHead>
@@ -116,12 +71,11 @@ export default function ContestTable({
           </TableHeader>
           <TableBody className=" -300">
             {contests.map((contest) => (
-              <TableRow key={contest.title}>
+              <TableRow key={contest.id}>
                 <TableCell className="font-medium">{contest.site}</TableCell>
                 <TableCell>{contest.title}</TableCell>
-                <TableCell>{formatTime(contest.startTime)}</TableCell>
-                <TableCell>{formatTime(contest.endTime)}</TableCell>
-                <TableCell>{formatDuration(contest.duration)}</TableCell>
+                <TableCell>{contest.startTime}</TableCell>
+                <TableCell>{contest.duration}</TableCell>
                 <TableCell>
                   <Link href={contest.url}>
                     <LinkIcon />
@@ -134,7 +88,7 @@ export default function ContestTable({
                       console.log(contest);
                     }}
                     className={
-                      bookmarks.some((c) => c.title === contest.title)
+                      bookmarks.some((c) => c.id === contest.id)
                         ? "fill-yellow-500"
                         : ""
                     }

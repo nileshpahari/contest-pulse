@@ -1,20 +1,8 @@
 "use server";
-import { URL } from "@/constants";
-import axios from "axios";
+import db from "@/db";
+import { Contest } from "@/types";
 
-type Site = "codechef" | "leetcode" | "codeforces";
-interface Contest {
-  site: Site;
-  title: string;
-  startTime: number;
-  duration: number;
-  endTime: number;
-  url: string;
-  id?: number;
-}
-
-export async function fetchContests(): Promise<Contest[]> {
-  const contests: Contest[] = (await axios.get(URL)).data;
-  
+export async function fetchContests() {
+  const contests: Contest[] = await db.contest.findMany();
   return contests;
 }
