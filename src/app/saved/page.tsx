@@ -13,6 +13,7 @@ import { Link as LinkIcon, BookmarkX } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Contest } from "@/types";
+import { SiteIcon } from "@/components/SiteIcon";
 
 export default function SavedContests() {
   const { status } = useSession();
@@ -79,7 +80,7 @@ export default function SavedContests() {
           <TableBody>
             {bookmarks.map((contest) => (
               <TableRow key={contest.title}>
-                <TableCell>{contest.site}</TableCell>
+                <TableCell><SiteIcon site={contest.site}/></TableCell>
                 <TableCell>{contest.title}</TableCell>
                 <TableCell>{new Date(contest.startTime).toLocaleDateString()}</TableCell>
                 <TableCell>{contest.duration}</TableCell>
