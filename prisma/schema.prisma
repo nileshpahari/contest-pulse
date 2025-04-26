@@ -14,32 +14,21 @@ datasource db {
 }
 
 model User {
-  id            Int        @id @default(autoincrement())
-  email         String        @unique
-  password      String
-  firstName     String
-  lastName      String?
-  savedContests UserContest[]
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  password  String
+  firstName String
+  lastName  String?
+
+  savedContests Contest[] @relation("UserSavedContests")
 }
 
-model Contests {
+model Contest {
+  id        Int      @id @default(autoincrement())
   title     String
   site      String
-  startTime BigInt
-  endTime   BigInt
-  duration  Int
+  startTime DateTime
+  duration  String
   url       String
-  savedBy   UserContest[]
-
-  @@id([site, title])
-}
-
-model UserContest {
-  userId  Int
-  site    String
-  title   String
-  user    User     @relation(fields: [userId], references: [id])
-  contest Contests @relation(fields: [site, title], references: [site, title])
-
-  @@id([userId, site, title])
+  savedBy   User[]   @relation("UserSavedContests")
 }
