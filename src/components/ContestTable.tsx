@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Link as LinkIcon, Bookmark } from "lucide-react";
 import Link from "next/link";
-import { fetchContests } from "@/app/actions/fetchContests";
+import { fetchUpcomingContests } from "@/app/actions/fetchContests";
 import { Contest } from "@/types/index";
 
 export default function ContestTable({
@@ -23,7 +23,7 @@ export default function ContestTable({
   const [bookmarks, setBookmarks] = useState<Contest[]>([]);
 
   useEffect(() => {
-    fetchContests().then((contests) => {
+    fetchUpcomingContests().then((contests) => {
       if (contests) {
         setContests(contests);
         setLoading(false);
@@ -74,7 +74,7 @@ export default function ContestTable({
               <TableRow key={contest.id}>
                 <TableCell className="font-medium">{contest.site}</TableCell>
                 <TableCell>{contest.title}</TableCell>
-                <TableCell>{contest.startTime}</TableCell>
+                <TableCell>{contest.startTime.toLocaleDateString()}</TableCell>
                 <TableCell>{contest.duration}</TableCell>
                 <TableCell>
                   <Link href={contest.url}>

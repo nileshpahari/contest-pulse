@@ -9,13 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Link as LinkIcon, BookmarkX, AwardIcon } from "lucide-react";
+import { Link as LinkIcon, BookmarkX } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Contest } from "@/types";
 
 export default function SavedContests() {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const [bookmarks, setBookmarks] = useState<Contest[]>([]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function SavedContests() {
       setBookmarks(saved);
     };
     laodSaved();
-  }, []);
+  }, [status]);
 
   const removeBookmark = async (id: number) => {
     const updated = bookmarks.filter((c) => c.id !== id);
@@ -81,7 +81,7 @@ export default function SavedContests() {
               <TableRow key={contest.title}>
                 <TableCell>{contest.site}</TableCell>
                 <TableCell>{contest.title}</TableCell>
-                <TableCell>{contest.startTime}</TableCell>
+                <TableCell>{new Date(contest.startTime).toLocaleDateString()}</TableCell>
                 <TableCell>{contest.duration}</TableCell>
                 <TableCell>
                   <Link href={contest.url}>
