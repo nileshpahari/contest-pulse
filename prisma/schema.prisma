@@ -25,9 +25,9 @@ model User {
 model Contests {
   title     String
   site      String
-  startTime DateTime
+  startTime BigInt
+  endTime   BigInt
   duration  Int
-  endTime   DateTime
   url       String
   savedBy   UserContest[]
 
