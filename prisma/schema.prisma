@@ -27,7 +27,7 @@ model Contest {
   id        Int      @id @default(autoincrement())
   title     String
   site      String
-  startTime DateTime
+  startTime String
   duration  String
   url       String
   savedBy   User[]   @relation("UserSavedContests")
