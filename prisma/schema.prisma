@@ -30,7 +30,7 @@ model Contest {
   startTime DateTime
   endTime   DateTime
   duration  String
-  url       String
+  url       String @unique
   isPast    Boolean @default(false)
   savedBy   User[]   @relation("UserSavedContests")
 }
