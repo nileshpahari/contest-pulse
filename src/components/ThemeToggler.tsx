@@ -16,7 +16,7 @@ export function ModeToggle() {
   if (!mounted) return null;
   return (
     <Button
-      variant="destructive"
+      variant="ghost"
       size="icon"
       onClick={() => setTheme(resolvedTheme === "light" ? "dark" : "light")}
     >
