@@ -1,130 +1,120 @@
 "use client";
+
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
+import { useEffect, useRef, useState } from "react";
 import { createNoise3D } from "simplex-noise";
 
 export const WavyBackground = ({
   children,
   className,
   containerClassName,
-  colors,
-  waveWidth,
-  backgroundFill,
+  waveWidth = 50,
   blur = 10,
-  speed = "fast",
+  speed = "slow",
   waveOpacity = 0.5,
   ...props
 }: {
-  children?: any;
+  children?: React.ReactNode;
   className?: string;
   containerClassName?: string;
-  colors?: string[];
   waveWidth?: number;
-  backgroundFill?: string;
   blur?: number;
-  speed?: "slow" | "fast";
+  speed?: "slow" | "medium" | "fast";
   waveOpacity?: number;
   [key: string]: any;
 }) => {
+  const { theme } = useTheme();
   const noise = createNoise3D();
-  let w: number,
-    h: number,
-    nt: number,
-    i: number,
-    x: number,
-    ctx: any,
-    canvas: any;
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const getSpeed = () => {
-    switch (speed) {
-      case "slow":
-        return 0.001;
-      case "fast":
-        return 0.002;
-      default:
-        return 0.001;
-    }
-  };
+  const [isSafari] = useState(
+    typeof window !== "undefined" &&
+      /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+  );
 
-  const init = () => {
-    canvas = canvasRef.current;
-    ctx = canvas.getContext("2d");
-    w = ctx.canvas.width = window.innerWidth;
-    h = ctx.canvas.height = window.innerHeight;
-    ctx.filter = `blur(${blur}px)`;
-    nt = 0;
-    window.onresize = function () {
-      w = ctx.canvas.width = window.innerWidth;
-      h = ctx.canvas.height = window.innerHeight;
-      ctx.filter = `blur(${blur}px)`;
-    };
-    render();
-  };
+  const colors =
+    theme === "dark"
+      ? [
+          "oklch(0.488 0.243 264.376)",
+          "oklch(0.696 0.17 162.48)",
+          "oklch(0.769 0.188 70.08)",
+          "oklch(0.627 0.265 303.9)",
+          "oklch(0.645 0.246 16.439)",
+        ]
+      : [
+          "oklch(0.646 0.222 41.116)",
+          "oklch(0.6 0.118 184.704)",
+          "oklch(0.398 0.07 227.392)",
+          "oklch(0.828 0.189 84.429)",
+          "oklch(0.769 0.188 70.08)",
+        ];
 
-  const waveColors = colors ?? [
-    "#38bdf8",
-    "#818cf8",
-    "#c084fc",
-    "#e879f9",
-    "#22d3ee",
-  ];
-  const drawWave = (n: number) => {
-    nt += getSpeed();
-    for (i = 0; i < n; i++) {
-      ctx.beginPath();
-      ctx.lineWidth = waveWidth || 50;
-      ctx.strokeStyle = waveColors[i % waveColors.length];
-      for (x = 0; x < w; x += 5) {
-        var y = noise(x / 800, 0.3 * i, nt) * 100;
-        ctx.lineTo(x, y + h * 0.5); // adjust for height, currently at 50% of the container
-      }
-      ctx.stroke();
-      ctx.closePath();
-    }
-  };
-
-  let animationId: number;
-  const render = () => {
-    ctx.fillStyle = backgroundFill || "black";
-    ctx.globalAlpha = waveOpacity || 0.5;
-    ctx.fillRect(0, 0, w, h);
-    drawWave(5);
-    animationId = requestAnimationFrame(render);
-  };
+  const backgroundFill =
+    theme === "dark" ? "oklch(0.129 0.042 264.695)" : "oklch(1 0 0)";
 
   useEffect(() => {
-    init();
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationId: number;
+    let w = (canvas.width = window.innerWidth);
+    let h = (canvas.height = window.innerHeight);
+
+    const render = (nt: number) => {
+      ctx.fillStyle = backgroundFill;
+      ctx.globalAlpha = waveOpacity;
+      ctx.fillRect(0, 0, w, h);
+
+      colors.forEach((color, i) => {
+        ctx.beginPath();
+        ctx.lineWidth = waveWidth;
+        ctx.strokeStyle = color;
+        for (let x = 0; x < w; x += 5) {
+          const y = noise(x / 800, 0.3 * i, nt) * 100;
+          ctx.lineTo(x, y + h * 0.5);
+        }
+        ctx.stroke();
+      });
+
+      animationId = requestAnimationFrame(() =>
+        render(
+          nt + (speed === "fast" ? 0.002 : speed === "slow" ? 0.0005 : 0.001)
+        )
+      );
+    };
+
+    const handleResize = () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener("resize", handleResize);
+    render(0);
+
     return () => {
       cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", handleResize);
     };
-  }, []);
-
-  const [isSafari, setIsSafari] = useState(false);
-  useEffect(() => {
-    // I'm sorry but i have got to support it on safari.
-    setIsSafari(
-      typeof window !== "undefined" &&
-        navigator.userAgent.includes("Safari") &&
-        !navigator.userAgent.includes("Chrome")
-    );
-  }, []);
-
+  }, [theme, colors, backgroundFill, waveOpacity, waveWidth, speed, noise]);
   return (
     <div
-      className={cn(
-        "h-screen flex flex-col items-center justify-center",
-        containerClassName
-      )}
+      className={cn("relative w-full", containerClassName)}
+      style={{ height: "100vh" }}
     >
       <canvas
-        className="absolute inset-0 z-0"
         ref={canvasRef}
-        id="canvas"
+        className="fixed inset-0 z-0 w-full h-full pointer-events-none" // Disable interaction
         style={{
-          ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
+          filter: isSafari ? `blur(${blur}px)` : undefined,
         }}
-      ></canvas>
-      <div className={cn("relative z-10", className)} {...props}>
+      />
+      <div
+        className={cn("relative z-10 h-full overflow-y-auto", className)}
+        {...props}
+      >
         {children}
       </div>
     </div>
