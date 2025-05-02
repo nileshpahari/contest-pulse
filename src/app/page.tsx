@@ -36,7 +36,7 @@ export default function Home() {
           </motion.div>
 
           {/* Main Content */}
-          <div className="px-4 py-10 md:py-16">
+          <div className="px-4 py-8 md:py-12">
             {/* Animated Title */}
             <h1 className="relative z-10 mx-auto max-w-4xl text-center text-4xl font-bold text-foreground md:text-6xl lg:text-7xl">
               {"Contest Pulse".split(" ").map((word, index) => (
@@ -106,7 +106,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1.4 }}
-            className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl"
+            className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl"
           >
             {[
               {
