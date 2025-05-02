@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { updateContestTable } from '@/lib/updateContestTable'; // move your script code to /lib
+import { updateContestTable } from '@/lib/updateContestTable'; 
 
 export async function GET() {
-  await updateContestTable();
-  return NextResponse.json({ success: true });
+  const succeeded:boolean = await updateContestTable();
+  return NextResponse.json({ success: succeeded });
 }

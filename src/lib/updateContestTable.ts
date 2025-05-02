@@ -58,9 +58,16 @@ const togglePastContest = async () => {
     },
   });
 };
-export const updateContestTable = async () => {
-  await togglePastContest();
-  await addUpcoming();
+
+export const updateContestTable = async (): Promise<boolean> => {
+  try {
+    await togglePastContest();
+    await addUpcoming();
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 };
 
 updateContestTable();
