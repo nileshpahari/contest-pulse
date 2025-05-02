@@ -32,6 +32,7 @@ export async function Navbar() {
       active: !session,
     },
   ];
+  // return null;
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-sm border-b border-transparent">
       <div className="container mx-auto px-4">

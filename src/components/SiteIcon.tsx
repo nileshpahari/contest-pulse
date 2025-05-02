@@ -17,7 +17,7 @@ export const SiteIcon: React.FC<ContestIconProps> = ({ site, size = 24 }) => {
       break;
     case 'codeforces':
       IconComponent = SiCodeforces;
-      color = '#1A73E8'; 
+      color = '#1F8ACB'; 
       break;
     case 'codechef':
       IconComponent = SiCodechef;
