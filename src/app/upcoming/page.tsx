@@ -9,10 +9,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
-  Link as LinkIcon,
   BellRing,
   Bookmark,
-  ArrowUp,
   ArrowUpRight,
 } from "lucide-react";
 import Link from "next/link";
@@ -22,6 +20,7 @@ import { SiteIcon } from "@/components/SiteIcon";
 import { AnimatePresence, motion } from "framer-motion";
 import { AddReminder } from "@/components/AddReminder";
 import Loader from "@/components/Loader";
+import { loadDuration } from "@/lib/loadDuration";
 export default function ContestTable() {
   const [loading, setLoading] = useState(true);
   const [contests, setContests] = useState<Contest[]>([]);
@@ -37,7 +36,6 @@ export default function ContestTable() {
       }
     });
     const savedContests = JSON.parse(localStorage.getItem("contests") || "[]");
-    // console.log(savedContests);
     setBookmarks(savedContests);
   }, []);
   useEffect(() => {
@@ -106,7 +104,7 @@ export default function ContestTable() {
                       <TableHead>Start Time</TableHead>
                       <TableHead>Duration</TableHead>
                       <TableHead>Link</TableHead>
-                      <TableHead className="text-center">Bookmark</TableHead>
+                      <TableHead className="text-center">Save</TableHead>
                       <TableHead className="text-right w-[50px]">
                         Add reminder
                       </TableHead>
@@ -122,7 +120,7 @@ export default function ContestTable() {
                         <TableCell>
                           {contest.startTime.toLocaleString()}
                         </TableCell>
-                        <TableCell>{contest.duration}</TableCell>
+                        <TableCell>{loadDuration(contest)}</TableCell>
                         <TableCell>
                           <Link
                             target="_blank"
