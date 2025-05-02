@@ -8,7 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Link as LinkIcon, BellRing } from "lucide-react";
+import {
+  Link as LinkIcon,
+  BellRing,
+  Bookmark,
+  ArrowUp,
+  ArrowUpRight,
+} from "lucide-react";
 import Link from "next/link";
 import { fetchUpcomingContests } from "@/app/actions/fetchContests";
 import { Contest } from "@/types/index";
@@ -99,8 +105,8 @@ export default function ContestTable() {
                       <TableHead>Title</TableHead>
                       <TableHead>Start Time</TableHead>
                       <TableHead>Duration</TableHead>
-                      <TableHead>URL</TableHead>
-                      {/* <TableHead>Bookmark</TableHead> */}
+                      <TableHead>Link</TableHead>
+                      <TableHead className="text-center">Bookmark</TableHead>
                       <TableHead className="text-right w-[50px]">
                         Add reminder
                       </TableHead>
@@ -118,23 +124,29 @@ export default function ContestTable() {
                         </TableCell>
                         <TableCell>{contest.duration}</TableCell>
                         <TableCell>
-                          <Link href={contest.url}>
-                            <LinkIcon />
+                          <Link
+                            target="_blank"
+                            className="hover:text-blue-500"
+                            href={contest.url}
+                          >
+                            <ArrowUpRight />
                           </Link>
                         </TableCell>
-                        {/* <TableCell>
-                  <Bookmark
-                    onClick={() => {
-                      toggleBookmark(contest);
-                      console.log(contest);
-                    }}
-                    className={
-                      bookmarks.some((c) => c.id === contest.id)
-                        ? "fill-yellow-500"
-                        : ""
-                    }
-                  />
-                </TableCell> */}
+                        <TableCell>
+                          <div className="flex justify-center">
+                            <Bookmark
+                              onClick={() => {
+                                toggleBookmark(contest);
+                                console.log(contest);
+                              }}
+                              className={
+                                bookmarks.some((c) => c.id === contest.id)
+                                  ? "fill-yellow-500"
+                                  : ""
+                              }
+                            />
+                          </div>
+                        </TableCell>
                         <TableCell
                           onClick={notifyToggler}
                           className="flex justify-center w-full"

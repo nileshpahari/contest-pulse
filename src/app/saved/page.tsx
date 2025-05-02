@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Link as LinkIcon, BookmarkX } from "lucide-react";
+import { Link as LinkIcon, BookmarkX, ArrowUp, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Contest } from "@/types";
@@ -20,7 +20,7 @@ export default function SavedContests() {
   const [bookmarks, setBookmarks] = useState<Contest[]>([]);
 
   useEffect(() => {
-    const laodSaved = async () => {
+    const loadSaved = async () => {
       let saved;
       if (status !== "authenticated") {
         saved = JSON.parse(localStorage.getItem("contests") || "[]");
@@ -36,7 +36,7 @@ export default function SavedContests() {
       }
       setBookmarks(saved);
     };
-    laodSaved();
+    loadSaved();
   }, [status]);
 
   const removeBookmark = async (id: number) => {
@@ -61,7 +61,7 @@ export default function SavedContests() {
   }
 
   return (
-    <div className="py-20">
+    <div className="p-18">
       <div className="text-2xl font-bold mb-5 mt-2 w-full text-center">
         Saved Contests
       </div>
@@ -73,8 +73,8 @@ export default function SavedContests() {
               <TableHead>Title</TableHead>
               <TableHead>Start Time</TableHead>
               <TableHead>Duration</TableHead>
-              <TableHead>URL</TableHead>
-              <TableHead className="text-right">Remove</TableHead>
+              <TableHead>Link</TableHead>
+              <TableHead className="text-center">Remove</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -82,11 +82,11 @@ export default function SavedContests() {
               <TableRow key={contest.title}>
                 <TableCell><SiteIcon site={contest.site}/></TableCell>
                 <TableCell>{contest.title}</TableCell>
-                <TableCell>{new Date(contest.startTime).toLocaleDateString()}</TableCell>
-                <TableCell>{contest.duration}</TableCell>
+                <TableCell>{new Date(contest.startTime).toLocaleString()}</TableCell>
+                <TableCell>{new Date(contest.startTime) < new Date() ? "Ended" : contest.duration}</TableCell>
                 <TableCell>
-                  <Link href={contest.url}>
-                    <LinkIcon />
+                  <Link target="_blank" className="hover:text-blue-500" href={contest.url}>
+                    <ArrowUpRight />
                   </Link>
                 </TableCell>
                 <TableCell className="w-full flex justify-center">
