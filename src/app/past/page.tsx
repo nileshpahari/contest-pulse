@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ArrowBigLeft, ArrowUpRight, Link as LinkIcon, X } from "lucide-react";
+import Loader from "@/components/Loader";
 import { fetchPastContests } from "@/app/actions/fetchContests"; // create this
 import { Contest } from "@/types";
 import { SiteIcon } from "@/components/SiteIcon";
@@ -43,9 +44,9 @@ export default function PastContestTable() {
 
   if (loading) {
     return (
-      <h1 className="text-3xl font-bold min-w-screen flex justify-center items-center mt-20">
-        Fetching past contest data...
-      </h1>
+      <div className="h-screen min-w-screen flex justify-center items-center ">
+        <Loader />
+      </div>
     );
   }
 

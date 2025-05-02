@@ -8,23 +8,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Link as LinkIcon,
-  BellRing,
-} from "lucide-react";
+import { Link as LinkIcon, BellRing } from "lucide-react";
 import Link from "next/link";
 import { fetchUpcomingContests } from "@/app/actions/fetchContests";
 import { Contest } from "@/types/index";
 import { SiteIcon } from "@/components/SiteIcon";
 import { AnimatePresence, motion } from "framer-motion";
 import { AddReminder } from "@/components/AddReminder";
+import Loader from "@/components/Loader";
 export default function ContestTable() {
   const [loading, setLoading] = useState(true);
   const [contests, setContests] = useState<Contest[]>([]);
   const [bookmarks, setBookmarks] = useState<Contest[]>([]);
   // const [reminder, setReminder] = useState(false);
   const [showAddReminder, setShowAddReminder] = useState(false);
-  const [selectedContest, setSelectedContest] = useState<Contest|null>(null);
+  const [selectedContest, setSelectedContest] = useState<Contest | null>(null);
   useEffect(() => {
     fetchUpcomingContests().then((contests) => {
       if (contests) {
@@ -65,9 +63,9 @@ export default function ContestTable() {
 
   if (loading) {
     return (
-      <h1 className="text-3xl font-bold min-w-screen flex justify-center items-center">
-        Fetching contest details...
-      </h1>
+      <div className="h-screen min-w-screen flex justify-center items-center ">
+        <Loader />
+      </div>
     );
   }
   if (!loading)
@@ -77,7 +75,7 @@ export default function ContestTable() {
           {showAddReminder && (
             <AddReminder
               setShowAddReminder={setShowAddReminder}
-              contest={selectedContest || {} as Contest}
+              contest={selectedContest || ({} as Contest)}
             />
           )}
         </AnimatePresence>
@@ -91,7 +89,7 @@ export default function ContestTable() {
           >
             <div className={`mt-16 `}>
               <h1 className="text-2xl font-bold  -300 mb-5 mt-2 w-full text-center">
-              Upcoming Contests
+                Upcoming Contests
               </h1>
               <div className="max-w-3/4 m-auto border rounded-md px-4 py-1">
                 <Table>
