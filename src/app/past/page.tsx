@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Link as LinkIcon, X } from "lucide-react";
+import { ArrowBigLeft, ArrowUpRight, Link as LinkIcon, X } from "lucide-react";
 import { fetchPastContests } from "@/app/actions/fetchContests"; // create this
 import { Contest } from "@/types";
 import { SiteIcon } from "@/components/SiteIcon";
@@ -93,7 +93,7 @@ export default function PastContestTable() {
                       </TableCell>
                       <TableCell>{contest.title}</TableCell>
                       <TableCell>
-                        {contest.startTime.toLocaleDateString()}
+                        {contest.startTime.toLocaleString()}
                       </TableCell>
                       <TableCell>{contest.duration}</TableCell>
                       <TableCell>
@@ -101,7 +101,7 @@ export default function PastContestTable() {
                           onClick={() => setShowLinks(true)}
                           aria-label="View Links"
                         >
-                          <LinkIcon className="hover:text-blue-500" />
+                          <ArrowUpRight className="hover:text-blue-500" />
                         </button>
                       </TableCell>
                     </TableRow>

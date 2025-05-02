@@ -1,14 +1,9 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { motion } from "framer-motion";
 import Link from "next/link";
-export default function Home() {
-  const router = useRouter();
 
-  // useEffect(() => {
-  //   router.push("/upcoming");
-  // }, [router]);
+export default function Home() {
 
     return (<WavyBackground>
       <div className="relative mx-auto my-10 flex max-w-7xl flex-col items-center justify-center">
