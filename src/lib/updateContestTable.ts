@@ -1,6 +1,6 @@
 import axios from "axios";
 import db from "../db/index.js";
-import { URL } from ".././constants.js";
+import { URL } from ".././constants";
 
 function formatDuration(ms: number): string {
   const hours = Math.floor(ms / 3600000);
