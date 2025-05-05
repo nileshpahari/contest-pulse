@@ -20,7 +20,7 @@ import { SiteIcon } from "@/components/SiteIcon";
 import { AnimatePresence, motion } from "framer-motion";
 import { AddReminder } from "@/components/AddReminder";
 import Loader from "@/components/Loader";
-import { loadDuration } from "@/lib/loadDuration";
+import { LoadDuration } from "@/components/LoadDuration";
 export default function ContestTable() {
   const [loading, setLoading] = useState(true);
   const [contests, setContests] = useState<Contest[]>([]);
@@ -120,7 +120,7 @@ export default function ContestTable() {
                         <TableCell>
                           {contest.startTime.toLocaleString()}
                         </TableCell>
-                        <TableCell>{loadDuration(contest)}</TableCell>
+                        <TableCell><LoadDuration contest={contest}/></TableCell>
                         <TableCell>
                           <Link
                             target="_blank"
