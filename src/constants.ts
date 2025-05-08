@@ -1,1 +1,1 @@
-export const URL = "https://competeapi.vercel.app/contests/upcoming/";
+export const URL = process.env.fetchURL as string;
