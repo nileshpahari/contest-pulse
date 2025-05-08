@@ -20,6 +20,7 @@ export default function PastContestTable() {
   const [loading, setLoading] = useState(true);
   const [contests, setContests] = useState<Contest[]>([]);
   const [showLinks, setShowLinks] = useState(false);
+  const [selectedContest, setSelectedContest] = useState<Contest | null>(null);
 
   useEffect(() => {
     fetchPastContests().then((data) => {
@@ -61,7 +62,7 @@ export default function PastContestTable() {
   return (
     <div className="p-4">
       <AnimatePresence>
-        {showLinks && <ContestLinks setShowLinks={setShowLinks} />}
+        {showLinks && selectedContest && <ContestLinks contest={selectedContest} setShowLinks={setShowLinks}/>}
       </AnimatePresence>
 
       <AnimatePresence mode="wait">
@@ -99,7 +100,10 @@ export default function PastContestTable() {
                       <TableCell>{contest.duration}</TableCell>
                       <TableCell>
                         <button
-                          onClick={() => setShowLinks(true)}
+                          onClick={() => {
+                            setSelectedContest(contest);
+                            setShowLinks(true);
+                          }}
                           aria-label="View Links"
                         >
                           <ArrowUpRight className="hover:text-blue-500" />

@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Contest } from "@/types";
 import { SiteIcon } from "@/components/SiteIcon";
-import { loadDuration } from "@/lib/loadDuration";
+import {  LoadDuration } from "@/components/LoadDuration";
 
 export default function SavedContests() {
   const { status } = useSession();
@@ -84,7 +84,7 @@ export default function SavedContests() {
                 <TableCell><SiteIcon site={contest.site}/></TableCell>
                 <TableCell>{contest.title}</TableCell>
                 <TableCell>{new Date(contest.startTime).toLocaleString()}</TableCell>
-                <TableCell>{loadDuration(contest)}</TableCell>
+                <TableCell><LoadDuration contest={contest} /></TableCell>
                 <TableCell>
                   <Link target="_blank" className="hover:text-blue-500" href={contest.url}>
                     <ArrowUpRight />
