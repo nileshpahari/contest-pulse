@@ -3,16 +3,16 @@ import { X } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Contest } from "@/types";
+import { composeLeaderboardURL, composeSolURL } from "@/lib/composeURL";
 
 interface ContestLinksProps {
+  contest: Contest;
   setShowLinks: React.Dispatch<React.SetStateAction<boolean>>;
-  leaderboardUrl?: string;
-  solutionUrl?: string;
 }
 
 export function ContestLinks({
-  leaderboardUrl = "/",
-  solutionUrl = "/",
+  contest,
   setShowLinks,
 }: ContestLinksProps) {
   return (
@@ -38,14 +38,14 @@ export function ContestLinks({
 
         <div className="flex flex-col gap-4 mt-6">
           <Link
-            href={leaderboardUrl}
-            target={leaderboardUrl !== "/" ? "_blank" : "_self"}
+            href={composeLeaderboardURL(contest)} 
+            target={"_blank"}
           >
             <Button size="lg" className="w-full">
               Leaderboard
             </Button>
           </Link>
-          <Link href={solutionUrl} target="_blank">
+          <Link href={composeSolURL(contest)} target="_blank">
             <Button size="lg" className="w-full">
               Solutions
             </Button>
