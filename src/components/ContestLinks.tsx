@@ -5,16 +5,18 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Contest } from "@/types";
 import { composeLeaderboardURL, composeSolURL } from "@/lib/composeURL";
+import { useEffect, useState } from "react";
 
 interface ContestLinksProps {
   contest: Contest;
   setShowLinks: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function ContestLinks({
-  contest,
-  setShowLinks,
-}: ContestLinksProps) {
+export function ContestLinks({ contest, setShowLinks }: ContestLinksProps) {
+  const [solURL, setSolURL] = useState<string>("");
+  useEffect(() => {
+    composeSolURL(contest).then((url) =>{ setSolURL(url)});
+  }, []);
   return (
     <motion.div
       className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
@@ -37,17 +39,14 @@ export function ContestLinks({
         </button>
 
         <div className="flex flex-col gap-4 mt-6">
-          <Link
-            href={composeLeaderboardURL(contest)} 
-            target={"_blank"}
-          >
+          <Link href={composeLeaderboardURL(contest)} target={"_blank"}>
             <Button size="lg" className="w-full">
               Leaderboard
             </Button>
           </Link>
-          <Link href={composeSolURL(contest)} target="_blank">
+          <Link href={solURL} target="_blank">
             <Button size="lg" className="w-full">
-              Solutions
+              Solution
             </Button>
           </Link>
         </div>
