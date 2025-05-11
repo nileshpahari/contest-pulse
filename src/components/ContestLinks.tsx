@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Contest } from "@/types";
-import { composeLeaderboardURL, composeSolURL } from "@/lib/composeURL";
+import { composeLeaderboardURL, composeSolURL } from "@/app/actions/composeURL";
 import { useEffect, useState } from "react";
 
 interface ContestLinksProps {
@@ -14,8 +14,10 @@ interface ContestLinksProps {
 
 export function ContestLinks({ contest, setShowLinks }: ContestLinksProps) {
   const [solURL, setSolURL] = useState<string>("");
+  const [leaderboardURL, setLeaderboardURL] = useState<string>("");
   useEffect(() => {
     composeSolURL(contest).then((url) =>{ setSolURL(url)});
+    composeLeaderboardURL(contest).then((url) =>{ setLeaderboardURL(url)});
   }, []);
   return (
     <motion.div
@@ -39,7 +41,7 @@ export function ContestLinks({ contest, setShowLinks }: ContestLinksProps) {
         </button>
 
         <div className="flex flex-col gap-4 mt-6">
-          <Link href={composeLeaderboardURL(contest)} target={"_blank"}>
+          <Link href={leaderboardURL} target={"_blank"}>
             <Button size="lg" className="w-full">
               Leaderboard
             </Button>

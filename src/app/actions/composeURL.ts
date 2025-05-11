@@ -1,3 +1,4 @@
+"use server";
 import { Contest } from "@/types";
 import axios from "axios";
 import { YT_KEY } from "@/constants";
@@ -11,7 +12,6 @@ const getFirstVideoURL = async (query: string): Promise<string | null> => {
   });
   const data = res.data;
   const videoId = data.items?.[0]?.id?.videoId;
-  console.log(`https://www.youtube.com/watch?v=${videoId}`); // Log the video ID here (e.g., console.log(videoId);
   return videoId ? `https://www.youtube.com/watch?v=${videoId}` : null;
 };
 
@@ -24,13 +24,12 @@ export const composeSolURL = async (contest: Contest): Promise<string> => {
   const query = site + "+" + title + "+solution";
   const url = await getFirstVideoURL(query);
   if (url) {
-    console.log(url);
     return url;
   }
   return `https://www.youtube.com/results?search_query=${query}`;
 };
 
-export const composeLeaderboardURL = (contest: Contest): string => {
+export const composeLeaderboardURL = async (contest: Contest): Promise<string> => {
   const trimSlash = (url: string) => url.replace(/\/+$/, "");
   const base = trimSlash(contest.url);
 
@@ -47,23 +46,3 @@ export const composeLeaderboardURL = (contest: Contest): string => {
   }
   return base;
 };
-
-//
-
-// import {google} from "googleapis";
-// const youtube = google.youtube({
-//   version: 'v3',
-//   auth: process.env.YOUTUBE_API_KEY,
-// });
-
-// async function searchVideo(query: string) {
-//   const res = await youtube.search.list({
-//     part: 'snippet',
-//     q: query,
-//     type: 'video',
-//     maxResults: 1,
-//   });
-
-//   const videoId = res.data.items?.[0]?.id?.videoId;
-//   return videoId ? `https://www.youtube.com/watch?v=${videoId}` : null;
-// }
