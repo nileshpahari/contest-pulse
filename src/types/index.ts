@@ -9,3 +9,5 @@ export interface Contest {
 }
 
 export type Site = "codechef" | "leetcode" | "codeforces";
+
+export const Sites = ["CodeChef", "LeetCode", "CodeForces"]
