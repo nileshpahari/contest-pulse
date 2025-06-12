@@ -15,8 +15,10 @@ import { Contest } from "@/types";
 import { SiteIcon } from "@/components/SiteIcon";
 import { ContestLinks } from "@/components/ContestLinks";
 import { motion, AnimatePresence } from "framer-motion";
+import { Filter } from "@/components/Filter";
 
 export default function PastContestTable() {
+  const [siteFilter, setSiteFilter] = useState<string>("all");
   const [loading, setLoading] = useState(true);
   const [contests, setContests] = useState<Contest[]>([]);
   const [showLinks, setShowLinks] = useState(false);
@@ -76,6 +78,7 @@ export default function PastContestTable() {
             <h1 className="text-2xl font-bold  -300 mb-5 mt-2 w-full text-center">
               Past Contests
             </h1>
+            <Filter siteFilter={siteFilter} setSiteFilter={setSiteFilter} />      
             <div className="max-w-3/4 m-auto border rounded-md px-4 py-1">
               <Table>
                 <TableHeader>
@@ -88,7 +91,7 @@ export default function PastContestTable() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {contests.map((contest) => (
+                {contests.filter((c) => siteFilter === "all" || c.site.toLowerCase() === siteFilter.toLowerCase()).map((contest) => (
                     <TableRow key={contest.id}>
                       <TableCell>
                         <SiteIcon site={contest.site} />
@@ -120,3 +123,5 @@ export default function PastContestTable() {
     </div>
   );
 }
+
+

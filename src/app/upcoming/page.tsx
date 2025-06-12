@@ -21,7 +21,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AddReminder } from "@/components/AddReminder";
 import Loader from "@/components/Loader";
 import { LoadDuration } from "@/components/LoadDuration";
+import { Filter } from "@/components/Filter";
+// import { Toaster } from "react-hot-toast";
 export default function ContestTable() {
+  const [siteFilter, setSiteFilter] = useState<string>("all");
   const [loading, setLoading] = useState(true);
   const [contests, setContests] = useState<Contest[]>([]);
   const [bookmarks, setBookmarks] = useState<Contest[]>([]);
@@ -95,6 +98,8 @@ export default function ContestTable() {
               <h1 className="text-2xl font-bold  -300 mb-5 mt-2 w-full text-center">
                 Upcoming Contests
               </h1>
+              <Filter siteFilter={siteFilter} setSiteFilter={setSiteFilter} />      
+
               <div className="max-w-3/4 m-auto border rounded-md px-4 py-1">
                 <Table>
                   <TableHeader className="font-semibold  -500">
@@ -111,7 +116,7 @@ export default function ContestTable() {
                     </TableRow>
                   </TableHeader>
                   <TableBody className=" -300">
-                    {contests.map((contest) => (
+                  {contests.filter((c) => siteFilter === "all" || c.site.toLowerCase() === siteFilter.toLowerCase()).map((contest) => (
                       <TableRow key={contest.id}>
                         <TableCell className="font-medium">
                           <SiteIcon site={contest.site} />
@@ -135,7 +140,6 @@ export default function ContestTable() {
                             <Bookmark
                               onClick={() => {
                                 toggleBookmark(contest);
-                                console.log(contest);
                               }}
                               className={
                                 bookmarks.some((c) => c.id === contest.id)
@@ -168,6 +172,7 @@ export default function ContestTable() {
             </div>
           </motion.div>
         </AnimatePresence>
+        {/* <Toaster /> */}
       </div>
     );
 }
