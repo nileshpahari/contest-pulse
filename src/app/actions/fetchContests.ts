@@ -8,6 +8,7 @@ export async function fetchUpcomingContests() {
       isPast: false
     }
   });
+  contests.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
   return contests;
 }
 export async function fetchPastContests() {
@@ -16,5 +17,6 @@ export async function fetchPastContests() {
       isPast: true
     }
   });
+  contests.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime())
   return contests;
 }
