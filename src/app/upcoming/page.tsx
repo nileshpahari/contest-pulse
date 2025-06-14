@@ -22,7 +22,7 @@ import { AddReminder } from "@/components/AddReminder";
 import Loader from "@/components/Loader";
 import { LoadDuration } from "@/components/LoadDuration";
 import { Filter } from "@/components/Filter";
-// import { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 export default function ContestTable() {
   const [siteFilter, setSiteFilter] = useState<string>("all");
   const [loading, setLoading] = useState(true);
@@ -172,7 +172,7 @@ export default function ContestTable() {
             </div>
           </motion.div>
         </AnimatePresence>
-        {/* <Toaster /> */}
+        <Toaster />
       </div>
     );
 }
