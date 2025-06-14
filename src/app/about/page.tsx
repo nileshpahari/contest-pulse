@@ -1,5 +1,3 @@
-import UnderConstruction from "@/components/UnderConstruction";
-
 export default function About(){
-    return <UnderConstruction/>
+    return <div className="flex h-screen items-center justify-center text-4xl">Contest Pulse</div>
 }
