@@ -19,8 +19,11 @@ model User {
   password  String
   firstName String
   lastName  String?
-
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   savedContests Contest[] @relation("UserSavedContests")
+  reminders     Reminder[]
+  @@index([email])
 }
 
 model Contest {
@@ -33,4 +36,20 @@ model Contest {
   url       String @unique
   isPast    Boolean @default(false)
   savedBy   User[]   @relation("UserSavedContests")
+  reminders Reminder[]
+
+  @@index([startTime])
+  @@index([isPast])
+}
+
+model Reminder {
+  id         Int      @id @default(autoincrement())
+  userEmail  String      
+  contestId  Int
+  notifyAt   DateTime     
+  notified   Boolean  @default(false)
+  createdAt  DateTime    @default(now())
+user       User     @relation(fields: [userEmail], references: [email])
+  contest    Contest  @relation(fields: [contestId], references: [id])
+   @@unique([userEmail, contestId])
 }
