@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import NEXT_AUTH_CONFIG from "@/lib/auth";
+// import NEXT_AUTH_CONFIG from "@/lib/auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
