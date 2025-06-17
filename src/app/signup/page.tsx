@@ -20,7 +20,7 @@ export default function SignUp() {
     if (status === "authenticated") {
       router.push("/");
     }
-  }, [session]);
+  }, [session, router, status]);
   if (status == "authenticated") return null;
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
