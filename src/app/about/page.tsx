@@ -47,7 +47,7 @@ export default function About() {
       icon: <Clock className={`h-6 w-6 ${accentColor}`} />,
       title: "Future Plans",
       text:
-        "Personalised contest recommendations using AI, synchronization of saved contests between devices and calendar view are coming soon.",
+        "Personalised contest recommendations using AI, email notifications, synchronization of saved contests between devices and calendar view are coming soon.",
     },
   ];
 
