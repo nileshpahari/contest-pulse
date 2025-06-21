@@ -3,12 +3,10 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-  Trophy,
   Calendar,
   Clock,
   Users,
   Github,
-  Mail,
   ArrowLeft,
   ArrowRight,
   ExternalLink,
@@ -19,7 +17,7 @@ import { BackgroundBeams } from "@/components/background-beams";
 export default function About() {
   const accentColor = "text-orange-500 dark:text-orange-600";
   const accentBgColor = "bg-orange-500/20 dark:bg-orange-600/20";
-  const accentBorderColor = "border-orange-500/50 dark:border-orange-600/50";
+  const accentBorderColor = "border-orange-500/50";
   const accentShadowColor = "shadow-orange-500/10 dark:shadow-orange-600/10";
   const buttonBgColor =
     "bg-orange-500 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700";
@@ -53,7 +51,7 @@ export default function About() {
 
   return (
     <main className="min-h-screen">
-      <BackgroundBeams />
+      {/* <BackgroundBeams /> */}
       <div className="relative mx-auto pt-18 pb-16 flex max-w-5xl flex-col items-center justify-center px-4">
         <motion.h1
           initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
