@@ -55,6 +55,5 @@ export function composeCalURL(contest: Contest) {
     );
 
     const calendarURL = `${baseUrl}?${timezone}&${dates}&details=${description}&location=${location}&${additionalParams}&text=${title}`;
-
     return calendarURL;
   }

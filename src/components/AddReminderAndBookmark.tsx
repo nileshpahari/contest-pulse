@@ -4,9 +4,8 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Contest } from "@/types";
-import axios from "axios";
-import { toast } from "react-hot-toast";
-import { composeCalURL } from "@/lib/composeCalURL";
+import { composeCalURL } from "@/lib/calendarURL";
+import { enableEmailReminder } from "@/lib/enableReminder";
 
 interface AddReminderProps {
   contest: Contest;
@@ -16,18 +15,6 @@ interface AddReminderProps {
 }
 
 export function AddReminderAndBookmark({ contest, setShowAddReminder, onToggleBookmark, bookmarks }: AddReminderProps) {
-  async function enableEmailReminder(contest: Contest) {
-    try {
-      const res = await axios.post("/api/add-reminder", { contest });
-      if (res.status === 200) {
-        toast("Email reminder added");
-      }
-    } catch (error) {
-      toast("Feature Under Construction");
-    }
-    setShowAddReminder(false);
-  }
-
 
   return (
     <motion.div
@@ -74,7 +61,7 @@ export function AddReminderAndBookmark({ contest, setShowAddReminder, onToggleBo
             </Button>
           </Link>
           <Button
-            onClick={() => enableEmailReminder(contest)}
+            onClick={() => enableEmailReminder(contest, setShowAddReminder)}
             size="lg"
             className="w-full"
           >
