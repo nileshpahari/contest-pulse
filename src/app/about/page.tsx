@@ -12,7 +12,6 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BackgroundBeams } from "@/components/background-beams";
 
 export default function About() {
   const accentColor = "text-orange-500 dark:text-orange-600";
