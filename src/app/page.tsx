@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Trophy, Calendar, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-import { BackgroundBeams } from "@/components/background-beams";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 // import { AuroraBackground } from "@/components/ui/aurora-background";
 export default function Home() {
     const accentColor = "text-orange-500 dark:text-orange-600";
