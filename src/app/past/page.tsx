@@ -78,7 +78,9 @@ export default function PastContestTable() {
             <h1 className="text-2xl font-bold  -300 mb-5 mt-2 w-full text-center">
               Past Contests
             </h1>
-            <Filter siteFilter={siteFilter} setSiteFilter={setSiteFilter} />      
+            <div className="mb-4">
+              <Filter siteFilter={siteFilter} setSiteFilter={setSiteFilter}/>
+            </div>
             <div className="max-w-3/4 m-auto border rounded-md px-4 py-1">
               <Table>
                 <TableHeader>

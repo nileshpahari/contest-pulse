@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export function Filter({siteFilter, setSiteFilter, className}: {siteFilter: string, setSiteFilter: React.Dispatch<React.SetStateAction<string>>; className?: string}) {
   return (
-    <div className={cn(`flex justify-end items-center mb-4 max-w-3/4 m-auto border rounded-md`, className)}>
+    <div className={cn(`flex justify-end items-center max-w-3/4 m-auto border rounded-md`, className)}>
       <Select value={siteFilter} onValueChange={setSiteFilter}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Filter by site" />
