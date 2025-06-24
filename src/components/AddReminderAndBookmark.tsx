@@ -11,9 +11,11 @@ import { composeCalURL } from "@/lib/composeCalURL";
 interface AddReminderProps {
   contest: Contest;
   setShowAddReminder: React.Dispatch<React.SetStateAction<boolean>>;
+  onToggleBookmark: (contest: Contest) => void;
+  bookmarks: Contest[];
 }
 
-export function AddReminder({ contest, setShowAddReminder }: AddReminderProps) {
+export function AddReminderAndBookmark({ contest, setShowAddReminder, onToggleBookmark, bookmarks }: AddReminderProps) {
   async function enableEmailReminder(contest: Contest) {
     try {
       const res = await axios.post("/api/add-reminder", { contest });
@@ -25,6 +27,7 @@ export function AddReminder({ contest, setShowAddReminder }: AddReminderProps) {
     }
     setShowAddReminder(false);
   }
+
 
   return (
     <motion.div
@@ -48,18 +51,35 @@ export function AddReminder({ contest, setShowAddReminder }: AddReminderProps) {
         </button>
 
         <div className="flex flex-col gap-4 mt-6">
+            {bookmarks.some((bookmark) => bookmark.id === contest.id) ? (
+                <Button
+                    onClick={() => onToggleBookmark(contest)}
+                    size="lg"
+                    className="w-full"
+                >
+                    Remove Bookmark
+                </Button>
+            ) : (
+                <Button
+                    onClick={() => onToggleBookmark(contest)}
+                    size="lg"
+                    className="w-full"
+                >
+                    Add Bookmark
+                </Button>
+            )}
           <Link href={composeCalURL(contest)} target={"_blank"}>
             <Button size="lg" className="w-full">
               Add to Calendar
             </Button>
           </Link>
-          {/* <Button
+          <Button
             onClick={() => enableEmailReminder(contest)}
             size="lg"
             className="w-full"
           >
             Add Email Reminder
-          </Button> */}
+          </Button>
         </div>
       </motion.div>
     </motion.div>
