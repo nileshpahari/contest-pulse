@@ -15,10 +15,12 @@ import { useSession } from "next-auth/react";
 import { Contest } from "@/types";
 import { SiteIcon } from "@/components/SiteIcon";
 import {  LoadDuration } from "@/components/LoadDuration";
+import { Filter } from "@/components/Filter";
 
 export default function SavedContests() {
   const { status } = useSession();
   const [bookmarks, setBookmarks] = useState<Contest[]>([]);
+  const [siteFilter, setSiteFilter] = useState<string>("all");
 
   useEffect(() => {
     const loadSaved = async () => {
@@ -66,6 +68,9 @@ export default function SavedContests() {
       <div className="text-2xl font-bold mb-5 mt-2 w-full text-center">
         Saved Contests
       </div>
+      <div className="mb-4">
+              <Filter siteFilter={siteFilter} setSiteFilter={setSiteFilter}/>
+      </div>
       <div className="max-w-3/4 m-auto border rounded-md px-4 py-1">
         <Table>
           <TableHeader>
@@ -79,7 +84,7 @@ export default function SavedContests() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {bookmarks.map((contest) => (
+            {bookmarks.filter((c) => siteFilter === "all" || c.site.toLowerCase() === siteFilter.toLowerCase()).map((contest) => (
               <TableRow key={contest.id}>
                 <TableCell><SiteIcon site={contest.site}/></TableCell>
                 <TableCell>{contest.title}</TableCell>
