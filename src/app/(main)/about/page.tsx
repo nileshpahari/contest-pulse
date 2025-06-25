@@ -9,7 +9,6 @@ import {
   Github,
   ArrowLeft,
   ArrowRight,
-  ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -24,15 +23,15 @@ export default function About() {
   const sections = [
     {
       icon: <Users className={`h-6 w-6 ${accentColor}`} />,
-      title: "Our Mission",
+      title: "What is Contest Pulse?",
       text:
-        "Contest Pulse helps programmers stay ahead of the competitive‑programming curve by aggregating contests, sending timely reminders, and surfacing high‑quality solutions once the dust settles.",
+        "Contest Pulse is a web application that helps programmers stay ahead of the competitive‑programming curve by aggregating upcoming contests, sending timely reminders, and surfacing solutions once the dust settles.",
     },
     {
       icon: <Calendar className={`h-6 w-6 ${accentColor}`} />,
       title: "What We Offer",
       text:
-        "All‑in‑one dashboard for Codeforces, LeetCode and CodeChef, smart email notifications & bookmarking, crowdsourced editorial links, and a blazing‑fast UX built with Next.js & shadcn/ui.",
+        "All‑in‑one dashboard for Codeforces, LeetCode and CodeChef, smart email notifications, ability to add contests to your calendar, bookmarking, saving contests for future reference, leaderboard and solution links after the contest, and a blazing‑fast, clean and modern user experience.",
     },
     {
       icon: <Github className={`h-6 w-6 ${accentColor}`} />,
@@ -42,9 +41,9 @@ export default function About() {
     },
     {
       icon: <Clock className={`h-6 w-6 ${accentColor}`} />,
-      title: "Future Plans",
+      title: "Feel free to contribute",
       text:
-        "Personalised contest recommendations using AI, email notifications, synchronization of saved contests between devices and calendar view are coming soon.",
+        "Since the project is open source, feel free to contribute to it in any way you can, from reporting bugs to submitting pull requests and feature requests. You can find the repository on GitHub.",
     },
   ];
 
@@ -61,14 +60,6 @@ export default function About() {
           About Contest Pulse
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-          className="relative z-10 mx-auto max-w-2xl text-center text-lg text-muted-foreground mb-8"
-        >
-          Contest Pulse is your one‑stop hub for discovering programming contests, setting timely reminders, and revisiting editorial solutions once the contest is over — all wrapped in a clean, distraction‑free interface.
-        </motion.p>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {sections.map((section, idx) => (

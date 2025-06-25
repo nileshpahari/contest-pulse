@@ -11,9 +11,9 @@ export default function Home() {
   const accentShadowColor = "shadow-orange-500/10 dark:shadow-orange-600/10";
   const buttonBgColor = "bg-orange-500 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700";
   return (
-    <main>    
+    <main className="min-h-screen">    
     <BackgroundBeams />
-      <div className="relative mx-auto pt-18 pb-8 flex max-w-7xl flex-col items-center justify-center px-4">
+      <div className="relative mx-auto pt-18 pb-16 flex max-w-7xl flex-col items-center justify-center px-4">
           <div className="px-4 py-8 md:py-12">
             <h1 className="relative z-10 mx-auto max-w-4xl text-center text-4xl font-bold text-foreground md:text-6xl lg:text-7xl">
               {"Contest Pulse".split(" ").map((word, index) => (
