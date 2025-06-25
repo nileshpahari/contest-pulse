@@ -1,6 +1,8 @@
 import axios from "axios";
 import db from "../db/index";
 import { URL } from ".././constants";
+import { ApiContest, Contest } from "@/types";
+
 function formatDuration(ms: number): string {
   const hours = Math.floor(ms / 3600000);
   const minutes = Math.floor((ms % 3600000) / 60000);
@@ -13,8 +15,9 @@ function formatTime(time: number): Date {
 }
 
 const addUpcoming = async () => {
+  const now = new Date();
   const res = (await axios.get(URL)).data;
-  const upcomingContest = res.map((contest: any) => {
+  const upcomingContest = res.map((contest: ApiContest) => {
     return {
       site: contest.site,
       title: contest.title,
@@ -29,7 +32,7 @@ const addUpcoming = async () => {
 //     skipDuplicates: true,
 //   });
   await Promise.all(
-    upcomingContest.map((contest: any) =>
+    upcomingContest.map((contest: Contest) =>
       db.contest.upsert({
         where: { url: contest.url },
         create: { ...contest, isPast: false },
@@ -37,7 +40,7 @@ const addUpcoming = async () => {
           startTime: contest.startTime,
           endTime: contest.endTime,
           duration: contest.duration,
-          isPast: contest.endTime < Date.now(),
+          isPast: contest.endTime < now,
         },
       })
     )
@@ -45,10 +48,11 @@ const addUpcoming = async () => {
 };
 
 const togglePastContest = async () => {
+  const now = new Date();
   await db.contest.updateMany({
     where: {
       endTime: {
-        lt: new Date(),
+        lt: now,
       },
       isPast: false,
     },
@@ -68,5 +72,3 @@ export const updateContestTable = async (): Promise<boolean> => {
     return false;
   }
 };
-
-updateContestTable();
