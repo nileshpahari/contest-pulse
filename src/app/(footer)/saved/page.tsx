@@ -64,7 +64,7 @@ export default function SavedContests() {
   }
 
   return (
-    <div className="p-18">
+    <div className="p-4">
       <div className="text-2xl font-bold mb-5 mt-2 w-full text-center">
         Saved Contests
       </div>

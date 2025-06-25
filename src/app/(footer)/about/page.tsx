@@ -88,22 +88,6 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.8 }}
-          className="relative z-10 mt-8 text-center text-muted-foreground text-sm w-full"
-        >
-          <div className="w-full rounded-md border border-border bg-card p-4">
-            <p>
-              GitHub: <a href="https://github.com/nileshpahari/contest-pulse" className="underline hover:text-foreground transition-colors" target="_blank" rel="noopener noreferrer">nileshpahari/contest-pulse</a>
-            </p>
-            <p>
-              Creator: <a href="https://nileshkrpahari.xyz/" className="underline hover:text-foreground transition-colors" target="_blank" rel="noopener noreferrer">nileshkrpahari.xyz</a>
-            </p>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 1 }}
           className="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-4"
         >

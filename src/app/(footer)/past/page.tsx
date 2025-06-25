@@ -74,7 +74,7 @@ export default function PastContestTable() {
           animate={{ filter: showLinks ? "blur(4px)" : "blur(0px)" }}
           transition={{ duration: 0.3 }}
         >
-          <div className={`mt-16 `}>
+          <div>
             <h1 className="text-2xl font-bold  -300 mb-5 mt-2 w-full text-center">
               Past Contests
             </h1>
