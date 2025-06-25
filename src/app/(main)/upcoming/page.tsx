@@ -163,9 +163,7 @@ export default function ContestTable() {
               {viewMode === "calendar" ? (
                 <ContestCalendar
                   contests={contests}
-                  bookmarks={bookmarks}
                   siteFilter={siteFilter}
-                  onToggleBookmark={toggleBookmark}
                   onContestClick={handleContestClick}
                 />
               ) : (

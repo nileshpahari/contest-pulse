@@ -18,7 +18,7 @@ export function ContestLinks({ contest, setShowLinks }: ContestLinksProps) {
   useEffect(() => {
     composeSolURL(contest).then((url) =>{ setSolURL(url)});
     composeLeaderboardURL(contest).then((url) =>{ setLeaderboardURL(url)});
-  }, []);
+  }, [contest]);
   return (
     <motion.div
       className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"

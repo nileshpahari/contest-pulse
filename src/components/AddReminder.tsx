@@ -4,8 +4,6 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Contest } from "@/types";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 import { composeCalURL } from "@/lib/calendarURL";
 import { enableEmailReminder } from "@/lib/enableReminder";
 

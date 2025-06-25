@@ -28,7 +28,7 @@ export function composeCalURL(contest: Contest) {
 
     const additionalParams = "output=xml&sf=true";
 
-    const action = "action=TEMPLATE";
+    // const action = "action=TEMPLATE";
 
     const title = encodeURIComponent(
       "Contest at " +
@@ -38,10 +38,11 @@ export function composeCalURL(contest: Contest) {
         contest.title
     );
 
-    const startTimeISO = contest.startTime
-      .toISOString()
-      .replace(/-|:|\.\d+/g, "");
-    const endTimeISO = contest.endTime.toISOString().replace(/-|:|\.\d+/g, "");
+    // const startTimeISO = contest.startTime
+    //   .toISOString()
+    //   .replace(/-|:|\.\d+/g, "");
+
+    // const endTimeISO = contest.endTime.toISOString().replace(/-|:|\.\d+/g, "");
 
     // Create dates parameter
     // const dates = `dates=${contest.startTime}/${contest.endTime}`;

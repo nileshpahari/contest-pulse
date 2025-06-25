@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowBigLeft, ArrowUpRight, Link as LinkIcon, X } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Loader from "@/components/Loader";
 import { fetchPastContests } from "@/app/actions/fetchContests"; // create this
 import { Contest } from "@/types";

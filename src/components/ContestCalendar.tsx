@@ -1,26 +1,22 @@
 "use client";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Bookmark, X } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SiteIcon } from "@/components/SiteIcon";
 import type { Contest } from "@/types/index";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
-import { DialogClose, DialogTitle } from "@radix-ui/react-dialog";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 interface ContestCalendarProps {
   contests: Contest[];
-  bookmarks: Contest[];
   siteFilter: string;
-  onToggleBookmark: (contest: Contest) => void;
   onContestClick: (contest: Contest) => void;
 }
 
 export function ContestCalendar({
   contests,
-  bookmarks,
   siteFilter,
-  onToggleBookmark,
   onContestClick,
 }: ContestCalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
