@@ -17,6 +17,10 @@ const NEXT_AUTH_CONFIG = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/signin",
+    // error: "/error",
+  }
 }
 
 export default NEXT_AUTH_CONFIG
