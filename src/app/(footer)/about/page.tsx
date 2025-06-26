@@ -24,26 +24,22 @@ export default function About() {
     {
       icon: <Users className={`h-6 w-6 ${accentColor}`} />,
       title: "What is Contest Pulse?",
-      text:
-        "Contest Pulse is a web application that helps programmers stay ahead of the competitive‑programming curve by aggregating upcoming contests, sending timely reminders, and surfacing solutions once the dust settles.",
+      text: "Contest Pulse is a web application that helps programmers stay ahead of the competitive‑programming curve by aggregating upcoming contests, sending timely reminders, and surfacing solutions once the dust settles.",
     },
     {
       icon: <Calendar className={`h-6 w-6 ${accentColor}`} />,
       title: "What We Offer",
-      text:
-        "All‑in‑one dashboard for Codeforces, LeetCode and CodeChef, smart email notifications, ability to add contests to your calendar, bookmarking, saving contests for future reference, leaderboard and solution links after the contest, and a blazing‑fast, clean and modern user experience.",
+      text: "All‑in‑one dashboard for Codeforces, LeetCode and CodeChef, smart email notifications, ability to add contests to your calendar, bookmarking, saving contests for future reference, leaderboard and solution links after the contest, and a blazing‑fast, clean and modern user experience.",
     },
     {
       icon: <Github className={`h-6 w-6 ${accentColor}`} />,
       title: "Open Source & Creator",
-      text:
-        "Contest Pulse is open-source and built by Nilesh Pahari. You can explore the project on GitHub and connect via his portfolio for collaborations and ideas.",
+      text: "Contest Pulse is open-source and built by Nilesh Pahari. You can explore the project on GitHub and connect via his portfolio for collaborations and ideas.",
     },
     {
       icon: <Clock className={`h-6 w-6 ${accentColor}`} />,
       title: "Feel free to contribute",
-      text:
-        "Since the project is open source, feel free to contribute to it in any way you can, from reporting bugs to submitting pull requests and feature requests. You can find the repository on GitHub.",
+      text: "Since the project is open source, feel free to contribute to it in any way you can, from reporting bugs to submitting pull requests and feature requests. You can find the repository on GitHub.",
     },
   ];
 
@@ -51,23 +47,14 @@ export default function About() {
     <main className="min-h-screen">
       {/* <BackgroundBeams /> */}
       <div className="relative mx-auto pt-18 pb-16 flex max-w-5xl flex-col items-center justify-center px-4">
-        <motion.h1
-          initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-          animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="relative z-10 mb-6 text-center text-4xl font-bold text-foreground md:text-6xl"
-        >
+        <h1 className="relative z-10 mb-6 text-center text-4xl font-bold text-foreground md:text-6xl">
           About Contest Pulse
-        </motion.h1>
-
+        </h1>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {sections.map((section, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.4 + idx * 0.1 }}
               className={`rounded-xl border border-border bg-card/40 p-6 backdrop-blur-sm hover:${accentBorderColor} hover:shadow-md hover:${accentShadowColor} transition-all duration-300`}
             >
               <div
@@ -81,17 +68,16 @@ export default function About() {
               <p className="text-muted-foreground leading-relaxed">
                 {section.text}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 1 }}
-          className="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-4"
-        >
-          <Button asChild size="lg" className={`${buttonBgColor} text-white w-52`}>
+        <div className="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-4">
+          <Button
+            asChild
+            size="lg"
+            className={`${buttonBgColor} text-white w-52`}
+          >
             <Link href="/upcoming">
               Explore Contests <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
@@ -106,7 +92,7 @@ export default function About() {
               <ArrowLeft className="mr-2 h-4 w-4" /> Home
             </Link>
           </Button>
-        </motion.div>
+        </div>
       </div>
     </main>
   );
