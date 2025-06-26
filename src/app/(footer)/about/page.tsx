@@ -1,15 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   Calendar,
   Clock,
   Users,
-  Github,
   ArrowLeft,
   ArrowRight,
 } from "lucide-react";
+import { FaGithub as Github } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 
 export default function About() {
@@ -45,8 +44,7 @@ export default function About() {
 
   return (
     <main className="min-h-screen">
-      {/* <BackgroundBeams /> */}
-      <div className="relative mx-auto pt-18 pb-16 flex max-w-5xl flex-col items-center justify-center px-4">
+      <div className="relative mx-auto pt-8 flex max-w-5xl flex-col items-center justify-center px-4">
         <h1 className="relative z-10 mb-6 text-center text-4xl font-bold text-foreground md:text-6xl">
           About Contest Pulse
         </h1>
