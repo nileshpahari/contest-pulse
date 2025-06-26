@@ -1,15 +1,7 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 export function Footer() {
   return (
     <footer className="">
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-        className="relative z-10 mt-16 w-full flex justify-center flex-end"
+      <div className="relative z-10 mt-16 w-full flex justify-center flex-end"
       >
         <div className="w-full rounded-md border border-border bg-card/60 backdrop-blur-md p-4 text-center text-sm text-muted-foreground shadow-md">
           <p className="mb-1">
@@ -38,7 +30,7 @@ export function Footer() {
             ⭐ Feel free to star the repo if you found it useful!
           </p>
         </div>
-      </motion.div>
+      </div>
     </footer>
   );
 }
