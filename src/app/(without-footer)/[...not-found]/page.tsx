@@ -14,7 +14,7 @@ export default function NotFoundPage() {
           404 – Page Not Found
         </h1>
         <p className="text-muted-foreground text-sm mb-6">
-          Oops! Looks like the page you're looking for doesn’t exist.
+          Oops! Looks like the page you&apos;re looking for doesn&apos;t exist.
         </p>
 
         <Button

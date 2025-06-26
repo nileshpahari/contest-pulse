@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
     // your project has ESLint errors.
     // ignoreDuringBuilds: true,
   },
+   images: {
+    remotePatterns: [new URL("https://lh3.googleusercontent.com/**"), new URL("https://avatars.githubusercontent.com/**")],
+  }, 
+  
 };
 
 export default nextConfig;

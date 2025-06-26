@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Menu, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 export function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -17,15 +18,14 @@ export function Navbar() {
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
-
   // Inside your Navbar component
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    if(status=="loading") return;
-    if(!session?.user){
+    if (status == "loading") return;
+    if (!session?.user) {
       setDropdownOpen(false);
     }
-  }, [status, session])
+  }, [status, session]);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -99,10 +99,13 @@ export function Navbar() {
                     className="relative"
                   >
                     {session.user.image ? (
-                      <img
-                        src={session.user.image}
+                      <Image
+                        src={session.user.image!}
                         alt="Profile"
-                        className="w-6 h-6 rounded-full object-cover"
+                        width={24}
+                        height={24}
+                        className="rounded-full object-cover"
+                        priority
                       />
                     ) : (
                       <User className="h-5 w-5 text-muted-foreground" />
