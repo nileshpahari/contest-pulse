@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Contest } from "@/types";
 import { composeCalURL } from "@/lib/calendarURL";
 import { enableEmailReminder } from "@/lib/enableReminder";
+import { signIn, useSession } from "next-auth/react";
 
 interface AddReminderProps {
   contest: Contest;
@@ -16,6 +17,7 @@ interface AddReminderProps {
 
 export function AddReminderAndBookmark({ contest, setShowAddReminder, onToggleBookmark, bookmarks }: AddReminderProps) {
 
+  const {status} = useSession();
   return (
     <motion.div
       className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
@@ -61,7 +63,7 @@ export function AddReminderAndBookmark({ contest, setShowAddReminder, onToggleBo
             </Button>
           </Link>
           <Button
-            onClick={() => enableEmailReminder(contest, setShowAddReminder)}
+            onClick={() => status==="authenticated"?enableEmailReminder(contest, setShowAddReminder):signIn()}
             size="lg"
             className="w-full"
           >
