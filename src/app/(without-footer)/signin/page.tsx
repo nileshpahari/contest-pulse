@@ -44,7 +44,7 @@ export default function SignInClient() {
             <Button
               variant="outline"
               className="w-full justify-center gap-2"
-              onClick={() => signIn("google")}
+              onClick={() => signIn("google", {callbackUrl:"/"})}
             >
               <Google className="h-4 w-4" />
               Continue with Google
@@ -52,7 +52,7 @@ export default function SignInClient() {
             <Button
               variant="outline"
               className="w-full justify-center gap-2"
-              onClick={() => signIn("github")}
+              onClick={() => signIn("github", {callbackUrl:"/"})}
             >
               <Github className="h-4 w-4" />
               Continue with GitHub
