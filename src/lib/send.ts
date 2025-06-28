@@ -4,10 +4,31 @@ import db from "../db/index.js";
 
 export async function sendReminders() {
   try {
+    const now = new Date();
+
+    // Start of today (00:00 UTC)
+    const todayStart = new Date(
+      Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate(),
+        0,
+        0,
+        0,
+        0
+      )
+    );
+
+    // Start of tomorrow (00:00 UTC next day)
+    const tomorrowStart = new Date(todayStart.getTime() + 24 * 60 * 60 * 1000);
+
     // only doubtful logic
     const notifications = await db.notification.findMany({
       where: {
-        notifyAt: { lte: new Date() },
+        notifyAt: {
+          gte: todayStart,
+          lt: tomorrowStart,
+        },
         notified: false,
       },
       include: { contest: true },
