@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { Contest } from "@prisma/client";
-import db from "../db/index.js";
+import db from "../db/index";
 
 export async function sendReminders() {
   try {
