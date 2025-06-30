@@ -84,3 +84,16 @@ export async function sendEmail(to: string, contest: Contest) {
     throw error;
   }
 }
+
+
+const main = async (): Promise<boolean> => {
+  try {
+    await sendReminders();
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export default main;
