@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Providers } from "@/components/Providers";
-import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/Footer";
-
+import { GoogleAnalytics as Analytics } from "@next/third-parties/google"
 export const metadata: Metadata = {
   title: "Contest Pulse",
   description: "Track upcoming coding contests from Codeforces, LeetCode, CodeChef and more. Bookmark, get notified, and stay prepared.",
@@ -35,8 +34,8 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-grow">{children}</main>
           <Footer />
-          <Analytics />
         </Providers>
+        <Analytics gaId="G-W5W68SDS8R" />
       </body>
     </html>
   );

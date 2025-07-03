@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Providers } from "@/components/Providers";
-import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics as Analytics } from "@next/third-parties/google"
 
 export const metadata: Metadata = {
   title: "Contest Pulse",
@@ -33,8 +33,8 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
-          <Analytics />
         </Providers>
+        <Analytics gaId="G-W5W68SDS8R" />
       </body>
     </html>
   );
